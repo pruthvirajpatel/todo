@@ -11,7 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "isolatedModules": true,
-    "types": ["cypress", "node"] // <-- Add this line
+    "types": ["cypress", "node", "@testing-library/jest-dom"]
   },
   "include": ["src", "cypress/**/*.ts", "cypress/**/*.tsx"]
 }

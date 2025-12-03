@@ -1,0 +1,9 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+function App() {
+    const [count, setCount] = useState(0);
+    return (_jsxs("div", { className: "min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6", children: [_jsxs("div", { className: "flex gap-6 mb-8", children: [_jsx("a", { href: "https://vite.dev", target: "_blank", rel: "noopener noreferrer", children: _jsx("img", { src: viteLogo, className: "h-20 w-20", alt: "Vite logo" }) }), _jsx("a", { href: "https://react.dev", target: "_blank", rel: "noopener noreferrer", children: _jsx("img", { src: reactLogo, className: "h-20 w-20 animate-spin-slow", alt: "React logo" }) })] }), _jsx("h1", { className: "text-5xl font-extrabold mb-6 text-gray-900", children: "Vite + React" }), _jsxs("div", { className: "bg-white shadow-lg rounded-xl p-8 flex flex-col items-center mb-6", children: [_jsxs("button", { onClick: () => setCount((count) => count + 1), className: "px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition", children: ["count is ", count] }), _jsxs("p", { className: "mt-4 text-gray-500 text-center", children: ["Edit ", _jsx("code", { className: "bg-gray-100 px-1 rounded", children: "src/App.tsx" }), " and save to test HMR"] })] }), _jsx("p", { className: "text-gray-600 mb-8", children: "Click on the Vite and React logos to learn more" }), _jsxs("div", { className: "bg-white shadow-md rounded-xl p-8 text-center", children: [_jsx("h1", { className: "text-4xl font-bold text-blue-600 mb-4", children: "Hello Tailwind + React!" }), _jsx("p", { className: "text-gray-700", children: "Your setup is working \uD83C\uDF89" })] })] }));
+}
+export default App;

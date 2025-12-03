@@ -1,5 +1,7 @@
 // src/global.d.ts
 
+/// <reference types="@testing-library/jest-dom" />
+
 // For SCSS/CSS modules
 declare module '*.scss' {
   const content: { [className: string]: string };
