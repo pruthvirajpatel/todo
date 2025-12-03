@@ -102,20 +102,33 @@ body {
 
 ## 🧪 Testing Strategy
 
+**Testing Approach**: We use **colocated tests** - test files live next to the components they test.
+
 ### Unit Testing (Jest + React Testing Library)
-- **Configuration**: `jest.config.cjs` with jsdom environment
+- **Configuration**: `jest.config.cjs` with coverage reporting
 - **Setup file**: `jest.setup.ts` for global test configuration
-- **Module mocking**: Identity-obj-proxy for CSS/SCSS imports
-- **TypeScript support**: ts-jest transformer
+- **Test utilities**: `src/test-utils/` for shared testing helpers
+- **Coverage threshold**: 70% for branches, functions, lines, and statements
 
 **Test files:**
-- `*.test.tsx` - Component unit tests
-- Located alongside component files
+- `*.test.tsx` - Component unit tests (colocated with components)
+- Use `data-testid` attributes for reliable element selection
+- Import from `test-utils` instead of `@testing-library/react`
 
 ### E2E Testing (Cypress)
 - **Configuration**: `cypress.config.ts`
-- **Test files**: `*.cy.tsx` - Component tests with Cypress
+- **Test files**: `*.cy.tsx` - Component tests with Cypress (colocated)
 - **Test directory**: `cypress/` for integration tests
+
+### Coverage Reporting
+```bash
+npm run test:coverage          # Generate coverage report
+npm run test:coverage:watch    # Watch mode with coverage
+```
+
+Coverage reports are generated in `coverage/` directory. Open `coverage/lcov-report/index.html` to view detailed reports.
+
+📖 **See [TESTING_GUIDE.md](./TESTING_GUIDE.md) for detailed testing documentation and best practices.**
 
 ## 📁 Project Structure
 

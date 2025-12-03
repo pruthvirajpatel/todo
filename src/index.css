@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
-/* Custom SCSS here */
+/* Global styles */
 body {
-  background-color: rgb(243 244 246);
-  color: rgb(17 24 39);
+  background-color: rgb(243 244 246); /* Tailwind gray-100 */
+  color: rgb(17 24 39);               /* Tailwind gray-900 */
 }

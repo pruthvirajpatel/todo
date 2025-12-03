@@ -1,1 +1,0 @@
-{"root":["./src/app.cy.tsx","./src/app.test.tsx","./src/app.tsx","./src/global.d.ts","./src/main.tsx","./src/__mocks__/filemock.ts","./cypress/support/commands.ts","./cypress/support/component.ts","./cypress/component/app.cy.tsx"],"version":"5.9.3"}

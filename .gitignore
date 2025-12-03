@@ -22,3 +22,19 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Compiled JavaScript files in src (TypeScript only)
+src/**/*.js
+!src/**/*.config.js
+
+# Compiled JavaScript files in cypress (TypeScript only)
+cypress/**/*.js
+!cypress.config.js
+
+# Test coverage
+coverage
+.nyc_output
+*.lcov
+
+# Build info
+*.tsbuildinfo

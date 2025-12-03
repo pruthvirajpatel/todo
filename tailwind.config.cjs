@@ -4,4 +4,11 @@ export default {
     "./index.html",
     "./src/**/*.{ts,tsx,js,jsx}",
   ],
+  theme: {
+    extend: {
+      animation: {
+        'spin-slow': 'spin 20s linear infinite',
+      },
+    },
+  },
 };
