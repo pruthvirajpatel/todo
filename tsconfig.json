@@ -10,7 +10,8 @@
     "esModuleInterop": true, // ✅ Fix ts-jest import warnings
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "types": ["cypress", "node"] // <-- Add this line
   },
-  "include": ["src"]
+  "include": ["src", "cypress/**/*.ts", "cypress/**/*.tsx"]
 }
