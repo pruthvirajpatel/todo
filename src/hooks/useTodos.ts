@@ -2,7 +2,7 @@
 // VERSION 1: UNOPTIMIZED (Baseline for performance measurement)
 // FIX: Prevent overwriting localStorage on initial mount
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Todo, FilterType } from '../types/todo.types';
 import { storageService } from '../services/storageService';
 import {
@@ -80,12 +80,10 @@ export function useTodos() {
   }, []);
 
   // Filter todos based on current filter
-  // ⚠️ PERFORMANCE ISSUE: Recalculated on every render
-  const filteredTodos = filterTodos(todos, filter);
+  const filteredTodos = useMemo(() =>  filterTodos(todos, filter), [todos, filter]);
 
   // Calculate statistics
-  // ⚠️ PERFORMANCE ISSUE: Recalculated on every render
-  const stats = calculateStats(todos);
+  const stats = useMemo(() => calculateStats(todos), [todos]);
 
   return {
     todos: filteredTodos,
@@ -98,5 +96,6 @@ export function useTodos() {
     deleteTodo,
     updateTodo,
     clearCompleted,
+    hasCompleted: stats.completed > 0,
   };
 }

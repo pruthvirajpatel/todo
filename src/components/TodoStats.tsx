@@ -7,6 +7,7 @@ import { TodoStats as Stats } from "../types/todo.types";
 
 interface TodoStatsProps {
   stats: Stats;
+  hasCompleted: boolean;
   onClearCompleted: () => void;
 }
 
@@ -17,6 +18,7 @@ interface TodoStatsProps {
  */
 const TodoStats = memo(function TodoStats({
   stats,
+  hasCompleted,
   onClearCompleted,
 }: TodoStatsProps) {
   // ⚠️ PERFORMANCE ISSUE: Re-renders on every parent state change
@@ -76,6 +78,7 @@ const TodoStats = memo(function TodoStats({
           onClick={onClearCompleted}
           className="mt-4 w-full px-4 py-2.5 sm:py-2 bg-red-600 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors touch-manipulation"
           data-testid="clear-completed-button"
+          disabled={!hasCompleted}
         >
           Clear Completed ({stats.completed})
         </button>

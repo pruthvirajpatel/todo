@@ -24,6 +24,7 @@ function App() {
     deleteTodo,
     updateTodo,
     clearCompleted,
+    hasCompleted,
   } = useTodos();
   return (
     <div
@@ -56,7 +57,11 @@ function App() {
         />
 
         {/* Statistics */}
-        <TodoStats stats={stats} onClearCompleted={clearCompleted} />
+        <TodoStats
+          stats={stats}
+          hasCompleted={hasCompleted}
+          onClearCompleted={clearCompleted}
+        />
 
         {/* Performance Marker */}
         <div className="mt-6 sm:mt-8 text-center text-xs sm:text-sm text-gray-500 px-2">
