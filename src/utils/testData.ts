@@ -40,8 +40,46 @@ export function generateTestTodos(count: number): Todo[] {
   return todos;
 }
 
+/**
+ * Load test data directly into localStorage and reload the page
+ * @param count Number of todos to generate
+ */
+export function loadTestData(count: number): void {
+  const todos = generateTestTodos(count);
+  localStorage.setItem('todos_performance_app', JSON.stringify(todos));
+  console.log(`✅ Loaded ${count} test todos. Reloading page...`);
+  setTimeout(() => location.reload(), 500);
+}
+
+/**
+ * Clear all todos from localStorage
+ */
+export function clearAllData(): void {
+  localStorage.removeItem('todos_performance_app');
+  console.log('✅ Cleared all data. Reloading page...');
+  setTimeout(() => location.reload(), 500);
+}
+
 // Make available in browser console for testing
 if (typeof window !== 'undefined') {
   (window as any).generateTestTodos = generateTestTodos;
-  console.log('💡 Test data helper loaded! Use generateTestTodos(count) in console');
+  (window as any).loadTestData = loadTestData;
+  (window as any).clearAllData = clearAllData;
+  
+  console.log(`
+╔═══════════════════════════════════════╗
+║   📊 Test Data Helpers Loaded!       ║
+╠═══════════════════════════════════════╣
+║ 💡 Available Commands:                ║
+║                                       ║
+║ loadTestData(100)                     ║
+║   → Load 100 test todos & reload     ║
+║                                       ║
+║ clearAllData()                        ║
+║   → Clear all todos & reload         ║
+║                                       ║
+║ generateTestTodos(50)                 ║
+║   → Generate 50 todos (no reload)    ║
+╚═══════════════════════════════════════╝
+  `);
 }

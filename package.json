@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "clean": "find src -name '*.js' -type f ! -name '*.config.js' ! -name '*.cy.js' -delete",
+    "dev": "npm run clean && vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",

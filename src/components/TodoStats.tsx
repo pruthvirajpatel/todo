@@ -1,7 +1,9 @@
 // components/TodoStats.tsx
 // VERSION 1: UNOPTIMIZED
+// UPDATED: Mobile-responsive design
 
-import { TodoStats as Stats } from '../types/todo.types';
+import { memo } from "react";
+import { TodoStats as Stats } from "../types/todo.types";
 
 interface TodoStatsProps {
   stats: Stats;
@@ -11,50 +13,68 @@ interface TodoStatsProps {
 /**
  * Statistics and actions for todos
  * UNOPTIMIZED VERSION
+ * UPDATED: Mobile-responsive grid layout
  */
-export function TodoStats({ stats, onClearCompleted }: TodoStatsProps) {
+const TodoStats = memo(function TodoStats({
+  stats,
+  onClearCompleted,
+}: TodoStatsProps) {
   // ⚠️ PERFORMANCE ISSUE: Re-renders on every parent state change
   // even when stats haven't changed
 
   return (
-    <div 
-      className="bg-white shadow-md rounded-lg p-6 mt-6"
+    <div
+      className="bg-white shadow-md rounded-lg p-4 sm:p-6 mt-4 sm:mt-6"
       data-testid="todo-stats"
     >
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="text-center">
-          <p className="text-3xl font-bold text-blue-600" data-testid="stat-total">
+      {/* Stats Grid - 2 columns on mobile, 4 on desktop */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+        <div className="text-center p-2 sm:p-0">
+          <p
+            className="text-2xl sm:text-3xl font-bold text-blue-600"
+            data-testid="stat-total"
+          >
             {stats.total}
           </p>
-          <p className="text-sm text-gray-600 mt-1">Total</p>
+          <p className="text-xs sm:text-sm text-gray-600 mt-1">Total</p>
         </div>
 
-        <div className="text-center">
-          <p className="text-3xl font-bold text-yellow-600" data-testid="stat-active">
+        <div className="text-center p-2 sm:p-0">
+          <p
+            className="text-2xl sm:text-3xl font-bold text-yellow-600"
+            data-testid="stat-active"
+          >
             {stats.active}
           </p>
-          <p className="text-sm text-gray-600 mt-1">Active</p>
+          <p className="text-xs sm:text-sm text-gray-600 mt-1">Active</p>
         </div>
 
-        <div className="text-center">
-          <p className="text-3xl font-bold text-green-600" data-testid="stat-completed">
+        <div className="text-center p-2 sm:p-0">
+          <p
+            className="text-2xl sm:text-3xl font-bold text-green-600"
+            data-testid="stat-completed"
+          >
             {stats.completed}
           </p>
-          <p className="text-sm text-gray-600 mt-1">Completed</p>
+          <p className="text-xs sm:text-sm text-gray-600 mt-1">Completed</p>
         </div>
 
-        <div className="text-center">
-          <p className="text-3xl font-bold text-purple-600" data-testid="stat-completion-rate">
+        <div className="text-center p-2 sm:p-0">
+          <p
+            className="text-2xl sm:text-3xl font-bold text-purple-600"
+            data-testid="stat-completion-rate"
+          >
             {stats.completionRate}%
           </p>
-          <p className="text-sm text-gray-600 mt-1">Complete</p>
+          <p className="text-xs sm:text-sm text-gray-600 mt-1">Complete</p>
         </div>
       </div>
 
+      {/* Clear Completed Button - Touch-friendly */}
       {stats.completed > 0 && (
         <button
           onClick={onClearCompleted}
-          className="mt-4 w-full px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors"
+          className="mt-4 w-full px-4 py-2.5 sm:py-2 bg-red-600 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors touch-manipulation"
           data-testid="clear-completed-button"
         >
           Clear Completed ({stats.completed})
@@ -62,4 +82,5 @@ export function TodoStats({ stats, onClearCompleted }: TodoStatsProps) {
       )}
     </div>
   );
-}
+});
+export { TodoStats };

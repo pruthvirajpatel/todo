@@ -1,8 +1,9 @@
 // components/TodoList.tsx
 // VERSION 1: UNOPTIMIZED
+// UPDATED: Mobile-responsive design
 
-import { Todo } from '../types/todo.types';
-import { TodoItem } from './TodoItem';
+import { Todo } from "../types/todo.types";
+import { TodoItem } from "./TodoItem";
 
 interface TodoListProps {
   todos: Todo[];
@@ -14,16 +15,22 @@ interface TodoListProps {
 /**
  * List of todos
  * UNOPTIMIZED VERSION - No virtualization for long lists
+ * UPDATED: Mobile-responsive spacing
  */
-export function TodoList({ todos, onToggle, onDelete, onUpdate }: TodoListProps) {
+export function TodoList({
+  todos,
+  onToggle,
+  onDelete,
+  onUpdate,
+}: TodoListProps) {
   if (todos.length === 0) {
     return (
-      <div 
-        className="text-center py-12 text-gray-500"
+      <div
+        className="text-center py-8 sm:py-12 text-gray-500 px-4"
         data-testid="empty-state"
       >
-        <p className="text-lg">No todos yet!</p>
-        <p className="text-sm mt-2">Add one above to get started.</p>
+        <p className="text-base sm:text-lg">No todos yet!</p>
+        <p className="text-xs sm:text-sm mt-2">Add one above to get started.</p>
       </div>
     );
   }
@@ -32,10 +39,7 @@ export function TodoList({ todos, onToggle, onDelete, onUpdate }: TodoListProps)
   // Will be slow with 1000+ items
 
   return (
-    <div 
-      className="flex flex-col gap-3"
-      data-testid="todo-list"
-    >
+    <div className="flex flex-col gap-2 sm:gap-3" data-testid="todo-list">
       {todos.map((todo) => (
         <TodoItem
           key={todo.id}

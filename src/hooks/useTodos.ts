@@ -1,8 +1,9 @@
 // hooks/useTodos.ts
 // VERSION 1: UNOPTIMIZED (Baseline for performance measurement)
+// FIX: Prevent overwriting localStorage on initial mount
 
-import { useState, useEffect } from 'react';
-import { Todo, FilterType, TodoStats } from '../types/todo.types';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { Todo, FilterType } from '../types/todo.types';
 import { storageService } from '../services/storageService';
 import {
   createTodo,
@@ -18,6 +19,7 @@ import {
 export function useTodos() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [filter, setFilter] = useState<FilterType>('all');
+  const isInitialMount = useRef(true);
 
   // Load todos from localStorage on mount
   useEffect(() => {
@@ -26,60 +28,56 @@ export function useTodos() {
   }, []);
 
   // Save todos to localStorage whenever they change
+  // BUT skip the first render (initial mount) to prevent overwriting loaded data
   useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
     storageService.saveTodos(todos);
   }, [todos]);
 
   // Add a new todo
-  // ⚠️ PERFORMANCE ISSUE: This function is recreated on every render
-  const addTodo = (text: string, priority?: 'low' | 'medium' | 'high') => {
+  const addTodo = useCallback((text: string, priority?: 'low' | 'medium' | 'high') => {
     const validation = validateTodoText(text);
     if (!validation.valid) {
       throw new Error(validation.error);
     }
-
     const newTodo = createTodo(text, priority);
-    setTodos([...todos, newTodo]); // ⚠️ Creates new array every time
-  };
+    setTodos(prev => [...prev, newTodo]);
+  }, []);
 
-  // Toggle todo completion
-  // ⚠️ PERFORMANCE ISSUE: Recreated on every render
-  const toggleTodo = (id: string) => {
-    setTodos(
-      todos.map(todo =>
-        todo.id === id
-          ? { ...todo, completed: !todo.completed, updatedAt: new Date() }
-          : todo
+  // Toggle todo
+  const toggleTodo = useCallback((id: string) => {
+    setTodos(prev => 
+      prev.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed  } : todo
       )
     );
-  };
+  }, []);
 
   // Delete a todo
-  // ⚠️ PERFORMANCE ISSUE: Recreated on every render
-  const deleteTodo = (id: string) => {
-    setTodos(todos.filter(todo => todo.id !== id));
-  };
+  const deleteTodo = useCallback((id: string) => {
+      setTodos(prev => prev.filter(todo =>todo.id !== id ));
+  }, []);
 
   // Update todo text
-  // ⚠️ PERFORMANCE ISSUE: Recreated on every render
-  const updateTodo = (id: string, text: string) => {
+  const updateTodo = useCallback((id: string, text: string) => {
     const validation = validateTodoText(text);
     if (!validation.valid) {
       throw new Error(validation.error);
     }
-
-    setTodos(
-      todos.map(todo =>
-        todo.id === id ? { ...todo, text, updatedAt: new Date() } : todo
+    setTodos(prev => 
+      prev.map(todo =>
+        todo.id === id ? { ...todo, text} : todo
       )
     );
-  };
+  }, []);
 
   // Clear completed todos
-  // ⚠️ PERFORMANCE ISSUE: Recreated on every render
-  const clearCompleted = () => {
-    setTodos(todos.filter(todo => !todo.completed));
-  };
+  const clearCompleted = useCallback(() => {
+    setTodos(prev => prev.filter(todo => !todo.completed));
+  }, []);
 
   // Filter todos based on current filter
   // ⚠️ PERFORMANCE ISSUE: Recalculated on every render
