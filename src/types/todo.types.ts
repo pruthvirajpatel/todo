@@ -9,13 +9,15 @@ export interface Todo {
   completed: boolean;            // Completion status
   createdAt: Date;               // Creation timestamp
   updatedAt: Date;               // Last update timestamp
-  priority?: 'low' | 'medium' | 'high'; // Optional priority
+  priority?: Priority; // Optional priority
 }
 
 /**
  * Filter types for todo list
  */
 export type FilterType = 'all' | 'active' | 'completed';
+
+export type Priority = 'low' | 'medium' | 'high';
 
 /**
  * Statistics about todos
