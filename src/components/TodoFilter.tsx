@@ -1,6 +1,7 @@
 // components/TodoFilter.tsx
-// VERSION 1: UNOPTIMIZED
-// UPDATED: Mobile-responsive design
+// OPTIMIZED: Wrapped with React.memo to prevent unnecessary re-renders
+// Only re-renders when filter prop changes
+// Mobile-responsive design
 
 import { memo } from "react";
 import { FilterType } from "../types/todo.types";
@@ -12,8 +13,10 @@ interface TodoFilterProps {
 
 /**
  * Filter buttons for todos
- * UNOPTIMIZED VERSION
- * UPDATED: Mobile-responsive layout
+ * OPTIMIZED with React.memo
+ * ✅ Only re-renders when current filter changes
+ * ✅ Stable onChange callback from parent
+ * Mobile-responsive layout
  */
 const TodoFilter = memo(function TodoFilter({
   current,
@@ -21,7 +24,7 @@ const TodoFilter = memo(function TodoFilter({
 }: TodoFilterProps) {
   const filters: FilterType[] = ["all", "active", "completed"];
 
-  // ⚠️ PERFORMANCE ISSUE: Re-renders on every parent state change
+  // ✅ OPTIMIZED: React.memo prevents re-renders unless filter prop changes
 
   return (
     <div

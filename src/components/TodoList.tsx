@@ -1,6 +1,7 @@
 // components/TodoList.tsx
-// VERSION 1: UNOPTIMIZED
-// UPDATED: Mobile-responsive design
+// OPTIMIZED: Works with memoized TodoItem components
+// Used for small lists (<50 items), switches to virtualization for larger lists
+// Mobile-responsive design
 
 import { Todo } from "../types/todo.types";
 import { TodoItem } from "./TodoItem";
@@ -14,8 +15,10 @@ interface TodoListProps {
 
 /**
  * List of todos
- * UNOPTIMIZED VERSION - No virtualization for long lists
- * UPDATED: Mobile-responsive spacing
+ * OPTIMIZED: Renders all items directly (for lists <50 items)
+ * ✅ Each TodoItem is memoized to prevent unnecessary re-renders
+ * ✅ App.tsx switches to VirtualTodoList for 50+ items
+ * Mobile-responsive spacing
  */
 export function TodoList({
   todos,
@@ -35,8 +38,8 @@ export function TodoList({
     );
   }
 
-  // ⚠️ PERFORMANCE ISSUE: Renders ALL todos without virtualization
-  // Will be slow with 1000+ items
+  // ✅ OPTIMIZED: For small lists, direct rendering is fine
+  // For large lists (50+), App.tsx automatically uses VirtualTodoList instead
 
   return (
     <div className="flex flex-col gap-2 sm:gap-3" data-testid="todo-list">

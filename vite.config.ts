@@ -13,6 +13,12 @@ export default defineConfig({
       open: true,
     }),
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+      },
+    },
+  },
   optimizeDeps: {
     include: ["react", "react-dom"],
     esbuildOptions: {

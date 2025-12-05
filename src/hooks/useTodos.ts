@@ -1,6 +1,8 @@
 // hooks/useTodos.ts
-// VERSION 1: UNOPTIMIZED (Baseline for performance measurement)
-// FIX: Prevent overwriting localStorage on initial mount
+// OPTIMIZED: useCallback with functional updates + useMemo for calculations
+// ✅ All handlers use functional updates (prev => ...) with empty dependencies
+// ✅ filteredTodos and stats are memoized to prevent recalculation
+// FIX: Prevents overwriting localStorage on initial mount
 
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Todo, FilterType } from '../types/todo.types';
@@ -14,7 +16,10 @@ import {
 
 /**
  * Custom hook for managing todos
- * UNOPTIMIZED VERSION - We'll optimize this step by step
+ * OPTIMIZED with useCallback and useMemo
+ * ✅ Stable function references enable React.memo in child components
+ * ✅ Expensive calculations only run when dependencies change
+ * ✅ Functional updates avoid recreating callbacks
  */
 export function useTodos() {
   const [todos, setTodos] = useState<Todo[]>([]);

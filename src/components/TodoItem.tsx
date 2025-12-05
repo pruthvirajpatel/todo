@@ -1,6 +1,7 @@
 // components/TodoItem.tsx
-// VERSION 1: UNOPTIMIZED
-// UPDATED: Mobile-responsive design
+// OPTIMIZED: Wrapped with React.memo to prevent unnecessary re-renders
+// Receives stable function references via useCallback from parent
+// Mobile-responsive design
 
 import { memo, useState } from "react";
 import { Todo } from "../types/todo.types";
@@ -14,8 +15,10 @@ interface TodoItemProps {
 
 /**
  * Individual todo item with edit functionality
- * UNOPTIMIZED VERSION - Will re-render on any parent state change
- * UPDATED: Mobile-responsive layout
+ * OPTIMIZED with React.memo - Only re-renders when its own props change
+ * ✅ Prevents re-renders when other todos change
+ * ✅ Stable callbacks from parent enable memoization
+ * Mobile-responsive layout
  */
 const TodoItem = memo(function TodoItem({
   todo,
@@ -63,8 +66,8 @@ const TodoItem = memo(function TodoItem({
     }
   };
 
-  // ⚠️ PERFORMANCE ISSUE: This component re-renders whenever ANY todo in the list changes
-  // because the parent passes down inline functions that change reference
+  // ✅ OPTIMIZED: React.memo prevents re-renders unless this todo's props change
+  // Only re-renders when: todo data changes, or component enters edit mode
 
   return (
     <div

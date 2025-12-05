@@ -1,6 +1,7 @@
 // components/TodoStats.tsx
-// VERSION 1: UNOPTIMIZED
-// UPDATED: Mobile-responsive design
+// OPTIMIZED: Wrapped with React.memo to prevent unnecessary re-renders
+// Receives memoized stats from useTodos hook
+// Mobile-responsive design
 
 import { memo } from "react";
 import { TodoStats as Stats } from "../types/todo.types";
@@ -13,16 +14,17 @@ interface TodoStatsProps {
 
 /**
  * Statistics and actions for todos
- * UNOPTIMIZED VERSION
- * UPDATED: Mobile-responsive grid layout
+ * OPTIMIZED with React.memo
+ * ✅ Only re-renders when stats object changes (via useMemo in hook)
+ * ✅ Stable callback from parent
+ * Mobile-responsive grid layout
  */
 const TodoStats = memo(function TodoStats({
   stats,
   hasCompleted,
   onClearCompleted,
 }: TodoStatsProps) {
-  // ⚠️ PERFORMANCE ISSUE: Re-renders on every parent state change
-  // even when stats haven't changed
+  // ✅ OPTIMIZED: React.memo + useMemo'd stats = only re-renders when stats actually change
 
   return (
     <div

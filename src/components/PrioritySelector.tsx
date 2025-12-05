@@ -1,3 +1,8 @@
+// components/PrioritySelector.tsx
+// OPTIMIZED: Memoized component for priority selection
+// Part of TodoForm component splitting (Step 4)
+// Only re-renders when priority value changes
+
 import { memo } from "react";
 import { Priority } from "../types/todo.types";
 
@@ -6,6 +11,13 @@ interface PrioritySelectorProps {
   onChange: (priority: Priority) => void;
 }
 
+/**
+ * Priority selector component for new todos
+ * OPTIMIZED: Wrapped with React.memo
+ * ✅ Isolated from text input
+ * ✅ Only re-renders when priority value changes
+ * ✅ Receives stable onChange callback from parent
+ */
 const PrioritySelector = memo(function PrioritySelector({
   value,
   onChange,

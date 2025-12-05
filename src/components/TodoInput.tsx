@@ -1,5 +1,17 @@
+// components/TodoInput.tsx
+// OPTIMIZED: Memoized component for text input
+// Part of TodoForm component splitting (Step 4)
+// Only re-renders when value prop changes
+
 import { memo } from "react";
-// ✅ Memoize the text input separately
+
+/**
+ * Text input component for new todos
+ * OPTIMIZED: Wrapped with React.memo
+ * ✅ Isolated from priority selector
+ * ✅ Only re-renders when text value changes
+ * ✅ Receives stable onChange callback from parent
+ */
 const TodoInput = memo(function TodoInput({
   value,
   onChange,

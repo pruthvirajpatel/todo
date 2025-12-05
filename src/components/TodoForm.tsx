@@ -1,6 +1,7 @@
 // components/TodoForm.tsx
-// VERSION 1: UNOPTIMIZED
-// UPDATED: Mobile-responsive design
+// OPTIMIZED: Component splitting with stable callbacks
+// TodoInput and PrioritySelector are separate memoized components
+// Mobile-responsive design
 
 import { useCallback, useState } from "react";
 import { Priority } from "../types/todo.types";
@@ -13,8 +14,11 @@ interface TodoFormProps {
 
 /**
  * Form for adding new todos
- * UNOPTIMIZED VERSION
- * UPDATED: Mobile-responsive layout
+ * OPTIMIZED with component splitting
+ * ✅ TodoInput isolated - only re-renders on text change
+ * ✅ PrioritySelector isolated - only re-renders on priority change
+ * ✅ Stable useCallback functions prevent child re-renders
+ * Mobile-responsive layout
  */
 export function TodoForm({ onAdd }: TodoFormProps) {
   const [text, setText] = useState("");
