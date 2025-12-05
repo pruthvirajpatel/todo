@@ -5,7 +5,6 @@ import { visualizer } from "rollup-plugin-visualizer";
 export default defineConfig({
   plugins: [
     react(),
-
     visualizer({
       filename: "bundle-stats.html",
       template: "treemap",
@@ -14,14 +13,12 @@ export default defineConfig({
       open: true,
     }),
   ],
-
   optimizeDeps: {
     include: ["react", "react-dom"],
     esbuildOptions: {
       target: "esnext",
     },
   },
-
   build: {
     target: "esnext",
     modulePreload: true,
@@ -32,11 +29,18 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          react: ["react", "react-dom"],
+          // Vendor chunk: React and related libraries
+          'react-vendor': ['react', 'react-dom'],
+          // Virtualization chunk: Only loaded when needed
+          'virtualization': ['react-window'],
         },
+        // Name chunks based on their module
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
       },
+      
     },
-
     chunkSizeWarningLimit: 800,
   },
 });

@@ -38,3 +38,4 @@ coverage
 
 # Build info
 *.tsbuildinfo
+bundle-stats.html

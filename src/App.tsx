@@ -7,7 +7,20 @@ import { TodoForm } from "./components/TodoForm";
 import { TodoFilter } from "./components/TodoFilter";
 import { TodoList } from "./components/TodoList";
 import { TodoStats } from "./components/TodoStats";
-import { VirtualTodoList } from "./components/VariableTodoList";
+import { lazy, Suspense } from "react";
+
+// ✅ Lazy load VirtualTodoList (includes react-window)
+const VirtualTodoList = lazy(() => import("./components/VariableTodoList"));
+
+// ✅ Loading fallback component
+const ListLoadingFallback = () => (
+  <div className="flex items-center justify-center h-96">
+    <div className="text-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+      <p className="text-gray-600">Loading list...</p>
+    </div>
+  </div>
+);
 
 /**
  * Main Todo Application
@@ -52,14 +65,16 @@ function App() {
 
         {/* Todo List */}
         {useVirtualization ? (
-          <VirtualTodoList
-            todos={todos}
-            onToggle={toggleTodo}
-            onDelete={deleteTodo}
-            onUpdate={updateTodo}
-            height={600}
-            itemHeight={80}
-          />
+          <Suspense fallback={<ListLoadingFallback />}>
+            <VirtualTodoList
+              todos={todos}
+              onToggle={toggleTodo}
+              onDelete={deleteTodo}
+              onUpdate={updateTodo}
+              height={600}
+              itemHeight={80}
+            />
+          </Suspense>
         ) : (
           <TodoList
             todos={todos}
