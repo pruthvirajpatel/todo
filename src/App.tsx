@@ -7,6 +7,7 @@ import { TodoForm } from "./components/TodoForm";
 import { TodoFilter } from "./components/TodoFilter";
 import { TodoList } from "./components/TodoList";
 import { TodoStats } from "./components/TodoStats";
+import { VirtualTodoList } from "./components/VariableTodoList";
 
 /**
  * Main Todo Application
@@ -26,6 +27,7 @@ function App() {
     clearCompleted,
     hasCompleted,
   } = useTodos();
+  const useVirtualization = todos.length > 50; // Threshold for virtualization
   return (
     <div
       className="min-h-screen bg-gray-50 py-4 px-3 sm:py-8 sm:px-4 md:px-6"
@@ -49,12 +51,23 @@ function App() {
         <TodoFilter current={filter} onChange={setFilter} />
 
         {/* Todo List */}
-        <TodoList
-          todos={todos}
-          onToggle={toggleTodo}
-          onDelete={deleteTodo}
-          onUpdate={updateTodo}
-        />
+        {useVirtualization ? (
+          <VirtualTodoList
+            todos={todos}
+            onToggle={toggleTodo}
+            onDelete={deleteTodo}
+            onUpdate={updateTodo}
+            height={600}
+            itemHeight={80}
+          />
+        ) : (
+          <TodoList
+            todos={todos}
+            onToggle={toggleTodo}
+            onDelete={deleteTodo}
+            onUpdate={updateTodo}
+          />
+        )}
 
         {/* Statistics */}
         <TodoStats
