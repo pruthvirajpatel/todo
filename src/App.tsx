@@ -98,14 +98,6 @@ function App() {
           hasCompleted={hasCompleted}
           onClearCompleted={clearCompleted}
         />
-
-        {/* Performance Marker */}
-        <div className="mt-6 sm:mt-8 text-center text-xs sm:text-sm text-gray-500 px-2">
-          <p className="mb-1">✅ Version: Fully Optimized (All 6 Steps Applied)</p>
-          <p className="hidden sm:block">
-            React.memo • useCallback • useMemo • Splitting • Virtualization • Code Splitting
-          </p>
-        </div>
       </div>
     </div>
   );

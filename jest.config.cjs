@@ -35,7 +35,7 @@ module.exports = {
     '!src/**/__mocks__/**'
   ],
   
-  coverageThresholds: {
+  coverageThreshold: {
     global: {
       branches: 70,
       functions: 70,
