@@ -11,7 +11,7 @@ import { TodoList } from "./components/TodoList";
 import { TodoStats } from "./components/TodoStats";
 import { lazy, Suspense } from "react";
 
-// ✅ Lazy load VirtualTodoList (includes react-window)
+// ✅ Lazy load VirtualTodoList
 const VirtualTodoList = lazy(() => import("./components/VariableTodoList"));
 
 // ✅ Loading fallback component

@@ -1,4 +1,5 @@
-/** @type {import('tailwindcss').Config} */
+import type { Config } from 'tailwindcss';
+
 export default {
   content: [
     "./index.html",
@@ -6,9 +7,7 @@ export default {
   ],
   theme: {
     extend: {
-      animation: {
-        'spin-slow': 'spin 20s linear infinite',
-      },
+      // Add custom theme extensions here
     },
   },
-};
+} satisfies Config;

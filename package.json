@@ -1,8 +1,24 @@
 {
-  "name": "todo",
+  "name": "react-todo",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "React Todo app demonstrating performance optimization techniques",
+  "author": "Pruthviraj Patel",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pruthvirajpatel/todo.git"
+  },
+  "keywords": [
+    "react",
+    "performance",
+    "optimization",
+    "typescript",
+    "vite",
+    "tailwind",
+    "todo-app"
+  ],
   "scripts": {
     "clean": "find src -name '*.js' -type f ! -name '*.config.js' ! -name '*.cy.js' -delete",
     "dev": "npm run clean && vite",

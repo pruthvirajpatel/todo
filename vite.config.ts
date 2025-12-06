@@ -37,8 +37,6 @@ export default defineConfig({
         manualChunks: {
           // Vendor chunk: React and related libraries
           'react-vendor': ['react', 'react-dom'],
-          // Virtualization chunk: Only loaded when needed
-          'virtualization': ['react-window'],
         },
         // Name chunks based on their module
         chunkFileNames: 'assets/[name]-[hash].js',
