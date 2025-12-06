@@ -4,13 +4,17 @@ A comprehensive React Todo application built to master performance optimization 
 
 ## 🚀 Live Demo
 
-**Production:** [https://todo-d3djycl2j-pruthviraj-patels-projects-ddb137d0.vercel.app](https://todo-d3djycl2j-pruthviraj-patels-projects-ddb137d0.vercel.app)
+**Production:** <a href="https://todo-pruthviraj-patels-projects-ddb137d0.vercel.app/" target="_blank" rel="noopener noreferrer">
+https://todo-pruthviraj-patels-projects-ddb137d0.vercel.app/
+</a>
+
+
 
 ## 📊 Performance Journey
 
 This project was built to understand and solve real performance problems:
 
-**Check the src/md folder inside the Source for more details**
+**Check the src/md folder inside the Source folder for more details**
 
 
 ### Initial State (Unoptimized)
