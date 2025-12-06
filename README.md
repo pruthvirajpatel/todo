@@ -10,6 +10,9 @@ A comprehensive React Todo application built to master performance optimization 
 
 This project was built to understand and solve real performance problems:
 
+**Check the src/md folder inside the Source for more details**
+
+
 ### Initial State (Unoptimized)
 - ❌ All 100 TodoItem components re-rendering on every state change
 - ❌ Render time: **67ms** per interaction
@@ -164,9 +167,7 @@ const Stats = lazy(() => import('./components/Stats'));
 
 ### Load Performance (Lighthouse)
 - Performance: **100/100**
-- Accessibility: **100/100**
 - Best Practices: **100/100**
-- SEO: **100/100**
 
 ### Interaction Performance (React Profiler)
 - **Before Optimization:** 67ms per interaction
@@ -180,20 +181,33 @@ const Stats = lazy(() => import('./components/Stats'));
 
 ## 🎓 Learning Resources
 
-This project includes comprehensive documentation:
+### Quick Start
+- **Get Started** - Run `npm install && npm run dev` to start developing
+- **[Code Structure](#tech-stack)** - Explore the `/src` directory for React components
+- **[Performance Metrics](#performance-metrics)** - See the before/after improvements
 
-- **[START_HERE.md](./START_HERE.md)** - Project overview and setup
-- **[PERFORMANCE_JOURNEY.md](./PERFORMANCE_JOURNEY.md)** - Complete optimization story
-- **[PERFORMANCE_MEASUREMENT_GUIDE.md](./PERFORMANCE_MEASUREMENT_GUIDE.md)** - How to measure performance
-- **[README_OPTIMIZATION_GUIDES.md](./README_OPTIMIZATION_GUIDES.md)** - Directory of all guides
+### Key Concepts Demonstrated
 
-### Step-by-Step Optimization Guides
-1. [React.memo Implementation](./OPTIMIZATION_STEP_1_MEMO.md)
-2. [useCallback Optimization](./OPTIMIZATION_STEP_2_CALLBACK.md)
-3. [useMemo Implementation](./OPTIMIZATION_STEP_3_USEMEMO.md)
-4. [Component Splitting](./OPTIMIZATION_STEP_4_SPLITTING.md)
-5. [List Virtualization](./OPTIMIZATION_STEP_5_VIRTUALIZATION.md)
-6. [Code Splitting](./OPTIMIZATION_STEP_6_CODE_SPLITTING.md)
+#### 1. React.memo - Preventing Unnecessary Re-renders
+See implementation in `src/components/TodoItem.tsx`
+
+#### 2. useCallback - Stable Function References  
+See implementation in `src/hooks/useTodos.ts`
+
+#### 3. useMemo - Cached Computations
+See filtering logic in `src/App.tsx`
+
+#### 4. Virtual Scrolling
+See `@tanstack/react-virtual` usage in `src/components/TodoList.tsx`
+
+#### 5. Code Splitting  
+See lazy loading in `src/App.tsx`
+
+### How to Measure Performance
+1. **React DevTools Profiler** - Record interactions and analyze render times
+2. **Chrome DevTools Performance** - Track overall app performance
+3. **Lighthouse** - Run audits for comprehensive metrics
+4. **Bundle Analysis** - Run `npm run build` to see bundle-stats.html
 
 ## 🚀 Deployment
 
@@ -223,10 +237,10 @@ No environment variables required for basic functionality.
 ## 🐛 Troubleshooting
 
 ### CSS Not Loading in Production
-Make sure `postcss.config.cjs` is present with Tailwind v4 configuration:
+Make sure `postcss.config.ts` is present with Tailwind v4 configuration:
 
 ```javascript
-module.exports = {
+export default {
   plugins: {
     '@tailwindcss/postcss': {},
   },
