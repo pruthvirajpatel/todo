@@ -4,8 +4,8 @@ A comprehensive React Todo application built to master performance optimization 
 
 ## 🚀 Live Demo
 
-**Production:** <a href="https://todo-pruthviraj-patels-projects-ddb137d0.vercel.app/" target="_blank" rel="noopener noreferrer">
-https://todo-pruthviraj-patels-projects-ddb137d0.vercel.app/
+**Production:** <a href="https://todo-iota-hazel-72.vercel.app/" target="_blank" rel="noopener noreferrer">
+https://todo-iota-hazel-72.vercel.app/
 </a>
 
 
