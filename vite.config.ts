@@ -4,7 +4,9 @@ import { visualizer } from "rollup-plugin-visualizer";
 
 export default defineConfig({
   plugins: [
-    react(),
+    react({
+      jsxRuntime: "automatic",
+    }),
     visualizer({
       filename: "bundle-stats.html",
       template: "treemap",
@@ -18,20 +20,31 @@ export default defineConfig({
       scss: {
       },
     },
+    devSourcemap: false,
   },
   optimizeDeps: {
     include: ["react", "react-dom"],
     esbuildOptions: {
-      target: "esnext",
+      target: "es2022",
     },
   },
+  define: {
+    __DEV__: false,
+    "process.env.NODE_ENV": '"production"',
+  },
+  resolve: {
+    conditions: ["browser", "import", "module"],
+  },
+  esbuild: {
+    drop: ["console", "debugger"],
+  },
   build: {
-    target: "esnext",
-    modulePreload: true,
+    target: "es2022",
+    modulePreload: false,
     cssCodeSplit: true,
     sourcemap: false,
     minify: "esbuild",
-
+    cssMinify: 'esbuild',
     rollupOptions: {
       output: {
         manualChunks: {
