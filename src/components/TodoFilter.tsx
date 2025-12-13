@@ -35,14 +35,43 @@ const TodoFilter = memo(function TodoFilter({
         <button
           key={filter}
           onClick={() => onChange(filter)}
-          className={`flex-1 sm:flex-none px-4 sm:px-6 py-2.5 sm:py-2 rounded-lg text-sm sm:text-base font-medium transition-colors touch-manipulation ${
-            current === filter
-              ? "bg-blue-600 text-white shadow-md"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300 active:bg-gray-400"
-          }`}
           data-testid={`filter-${filter}`}
+          className={`
+            relative overflow-hidden
+            flex-1 sm:flex-none
+            px-4 sm:px-6 py-2.5 sm:py-2
+            rounded-lg
+            text-sm sm:text-base font-medium
+            touch-manipulation
+
+            transition-transform duration-150
+            hover:scale-[1.03]
+            active:scale-[0.97]
+            ${
+              current === filter
+                ? "bg-blue-600 text-white shadow-md"
+                : "bg-gray-200 text-gray-700"
+            }
+          `}
         >
-          {filter.charAt(0).toUpperCase() + filter.slice(1)}
+          {/* Hover / Active overlay (opacity animation only) */}
+          {current !== filter && (
+            <span
+              className="
+                pointer-events-none
+                absolute inset-0
+                bg-black/10
+                opacity-0
+                transition-opacity duration-150
+                hover:opacity-100
+                active:opacity-100
+            "
+            />
+          )}
+          {/* Button label */}
+          <span className="relative z-10">
+            {filter.charAt(0).toUpperCase() + filter.slice(1)}
+          </span>
         </button>
       ))}
     </div>
